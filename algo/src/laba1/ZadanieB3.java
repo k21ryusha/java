@@ -1,7 +1,8 @@
 package laba1;
 
 import java.util.Scanner;
-public class Zadanie_B_3{
+
+public class ZadanieB3 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String input = in.next();
@@ -15,7 +16,7 @@ public class Zadanie_B_3{
             if (Character.isLowerCase(currentChar)) {
                 System.out.print(currentChar);
             } else if (Character.isUpperCase(currentChar)) {
-                System.out.print(" "+currentChar);
+                System.out.print(" " + currentChar);
             }
         }
     }

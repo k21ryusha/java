@@ -1,14 +1,16 @@
 package laba1;
-
-import java.util.Arrays;
 import java.util.Scanner;
-public class Zadanie_B_1 {
+
+public class ZadanieB1 {
     public static void main(String[] args) {
+        System.out.print("Введите число до которого будут выведены простые числа: ");
         Scanner in = new Scanner(System.in);
         int input = in.nextInt();
         boolean[] b = new boolean[input + 1];
-        Arrays.fill(b, true);
-        Eratosfen(b,input);
+        for (int h = 0; h <= input; h++) {
+            b[h] = true;
+        }
+        eratosfen(b, input);
         System.out.println("Простые числа до " + input + ":");
         for (int i = 2; i <= input; i++) {
             if (b[i]) {
@@ -16,7 +18,8 @@ public class Zadanie_B_1 {
             }
         }
     }
-    public static void Eratosfen(boolean[] b, int input) {
+
+    public static void eratosfen(boolean[] b, int input) {
         b[0] = b[1] = false;
         for (int i = 2; i * i <= input; i++) {
             if (b[i]) {
