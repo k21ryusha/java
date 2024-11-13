@@ -6,7 +6,6 @@ public class ZadanieB4 {
         Scanner in = new Scanner(System.in);
         int input = in.nextInt();
         String str = Integer.toString(input);
-
         for (int i = 0; i < str.length(); i++) {
             char currentChar = str.charAt(i);
             if (Character.getNumericValue(currentChar) % 2 != 0) {
@@ -20,8 +19,6 @@ public class ZadanieB4 {
             } else {
                 System.out.print(currentChar);
             }
-
         }
-
     }
 }
