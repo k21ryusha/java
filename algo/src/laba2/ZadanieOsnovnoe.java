@@ -203,13 +203,30 @@ public class ZadanieOsnovnoe {
         list.printForward();
         System.out.println("Число элементов в списке: " + list.size());
     }
+    public static void MultilevelSinglyLinkedList() {
+        MultilevelSinglyLinkedList list = new MultilevelSinglyLinkedList();
+        list.addToFront(1);
+        list.addToFront(2);
+        list.addToEnd(3);
+        list.addToEnd(4);
+        list.addToMiddle(5, 2);
+        list.printList();
+        list.addChild(1, 6);
+        list.addChild(1, 7);
+        list.addChild(2, 8);
+        list.printList();
+        list.remove(3); // Удаляем элемент с индексом 3
+        System.out.println("Список после удаления элемента:");
+        list.printList();
+        System.out.println("Число элементов в списке: " + list.size());
+    }
     public static void main(String[] args) {
         //ArrayList();
         //LinkedList();
         //HashSet();
         //HashMap();
-        CircularyDoublyLinkedList();
+        // CircularyDoublyLinkedList();
         //SelfOrganisedList();
-
+        MultilevelSinglyLinkedList();
     }
 }

@@ -13,17 +13,17 @@ class SelfOrganizingList<T> {
     }
 
     public void addToFront(T element) {
-        counts.put(element, 0);
+        counts.putIfAbsent(element, 0);
         this.insertForward(element);
     }
 
     public void addToEnd(T element) {
-        counts.put(element, 0);
+        counts.putIfAbsent(element, 0);
         this.insertForward(element);
     }
 
     public void addToMiddle(T element, int index) {
-        counts.put(element, 0);
+        counts.putIfAbsent(element, 0);
         if (index < list.size()) {
             list.add(index, element);
         } else {
@@ -46,7 +46,7 @@ class SelfOrganizingList<T> {
 
     public void printForward() {
         for (T element : list) {
-            int count = counts.get(element);
+            int count = counts.getOrDefault(element,0);
             System.out.print(element + "(" + count + ") ");
         }
         System.out.println();
@@ -61,7 +61,7 @@ class SelfOrganizingList<T> {
 
     public void insertForward(T element) {
         int indEl = list.indexOf(element);
-        int countEL = counts.get(element);
+        int countEL = counts.getOrDefault(element,0);
         for (int i = 0; i < indEl; i++) {
             int count = counts.get(list.get(i));
             if (countEL > count) {
@@ -72,10 +72,11 @@ class SelfOrganizingList<T> {
     }
 
     public T get(T element) {
+        counts.putIfAbsent(element, 0);
         if (!this.list.contains(element)) {
             list.addFirst(element);
         }
-        counts.put(element, counts.get(element) + 1);
+        counts.putIfAbsent(element,0);
         insertForward(element);
         return element;
     }
