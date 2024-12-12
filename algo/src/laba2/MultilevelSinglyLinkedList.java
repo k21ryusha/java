@@ -1,6 +1,8 @@
 package laba2;
 
-    class Node {
+import java.util.Comparator;
+
+class Node {
         int data;
         Node next;
         Node child;
@@ -68,7 +70,6 @@ package laba2;
             current.next = current.next.next;
         }
 
-        // Подсчет числа элементов в списке
         public int size() {
             return size(head);
         }
@@ -98,7 +99,6 @@ package laba2;
             printList(node.child, level + 1);
             printList(node.next, level);
         }
-        // Добавление childa
         public void addChild(int parentData, int childData) {
             Node childNode = new Node(childData);
             Node current = head;
@@ -118,4 +118,141 @@ package laba2;
                 current = current.next;
             }
         }
+        public void quickSort() {
+            head = quickSort(head);
+        }
+
+        private Node quickSort(Node node) {
+            if (node == null || (node.next == null && node.child == null)) {
+                return node;
+            }
+
+            Node pivot = node;
+            Node lessHead = null;
+            Node lessTail = null;
+            Node greaterHead = null;
+            Node greaterTail = null;
+
+            Node current = node.next;
+            pivot.next = null;
+
+            while (current != null) {
+                Node next = current.next;
+                current.next = null;
+
+                if (current.data <= pivot.data) {
+                    if (lessHead == null) {
+                        lessHead = current;
+                        lessTail = current;
+                    } else {
+                        lessTail.next = current;
+                        lessTail = current;
+                    }
+                } else {
+                    if (greaterHead == null) {
+                        greaterHead = current;
+                        greaterTail = current;
+                    } else {
+                        greaterTail.next = current;
+                        greaterTail = current;
+                    }
+                }
+
+                current = next;
+            }
+
+            lessHead = quickSort(lessHead);
+            greaterHead = quickSort(greaterHead);
+
+            pivot.child = quickSort(pivot.child);
+
+            Node sortedHead = lessHead;
+            if (lessHead != null) {
+                Node lessEnd = lessHead;
+                while (lessEnd.next != null) {
+                    lessEnd = lessEnd.next;
+                }
+                lessEnd.next = pivot;
+            } else {
+                sortedHead = pivot;
+            }
+
+            pivot.next = greaterHead;
+
+            return sortedHead;
+        }
+    public void heapSort() {
+            head = heapSort(head);
+    }
+    private Node heapSort(Node node) {
+            if (node == null || (node.child == null && node.next == null)) {
+                return node;
+            }
+            Node sortedParents = sortLevel(node);
+            Node current = sortedParents;
+            while (current != null) {
+                if (current.child != null) {
+                    current.child = heapSort(current.child);
+                }
+                current = current.next;
+            }
+            return sortedParents;
+    }
+    private Node sortLevel(Node node) {
+            if (node == null || node.next == null) {
+                return node;
+            }
+            Node sortedHead = null;
+            while (node != null) {
+                Node max = findMax(node);
+                node = removeNode(node,max);
+                max.next = sortedHead;
+                sortedHead = max;
+            }
+            return sortedHead;
+    }
+    private Node removeNode(Node node, Node max) {
+            if(node == null || max == null) {
+                return node;
+            }
+            if(node == max){
+                return node.next;
+            }
+            Node current = node;
+            while (current.next != null) {
+            if(current.next == max) {
+                current.next = max.next;
+                break;
+                }
+            current = current.next;
+            }
+            max.next = null;
+            return node;
+    }
+    private Node findMax(Node node) {
+            if (node == null) {
+                return null;
+            }
+            Node max = node;
+            Node current = node;
+            while (current != null) {
+                if (current.data > max.data) {
+                    max = current;
+
+                }
+                current = current.next;
+            }
+            return max;
+    }
+    private Node reverseList(Node node) {
+            Node prev = null;
+            Node current = node;
+            while (current != null) {
+                Node next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            return prev;
+    }
 }

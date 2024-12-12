@@ -1,5 +1,7 @@
 package laba2;
 
+import java.util.Comparator;
+
 class Node2<T> {
     T data;
     Node2<T> next;
@@ -83,5 +85,107 @@ class CircularDoublyLinkedList<T> {
             current = current.prev;
         } while (current != head.prev);
         System.out.println();
+    }
+
+    public void quickSort(Comparator<T> comparator) {
+        if (size <= 1) {
+            return;
+        }
+        quickSort(head, head.prev, comparator);
+    }
+
+    private void quickSort(Node2<T> low, Node2<T> high, Comparator<T> comparator) {
+        if (low == null || high == null) {
+            return;
+        }
+        if (low == high) {
+            return;
+        }
+        Node2<T> pivot = partition(low, high, comparator);
+        quickSort(low, pivot.prev, comparator);
+        quickSort(pivot.next, high, comparator);
+    }
+
+    private Node2<T> partition(Node2<T> low, Node2<T> high, Comparator<T> comparator) {
+        T pivotData = high.data;
+        Node2<T> i = low.prev;
+
+        for (Node2<T> j = low; j != high; j = j.next) {
+            if (comparator.compare(j.data, pivotData) <= 0) {
+                if (i == null) {
+                    i = low;
+                } else {
+                    i = i.next;
+                }
+                T temp = i.data;
+                i.data = j.data;
+                j.data = temp;
+            }
+        }
+        if (i == null) {
+            i = low;
+        } else {
+            i = i.next;
+        }
+        T temp = i.data;
+        i.data = high.data;
+        high.data = temp;
+        return i;
+    }
+
+    public void heapSort(Comparator<T> comparator) {
+        if (size <= 1) {
+            return;
+        }
+        buildHeap(comparator);
+        sortHeap(comparator);
+    }
+
+    private void buildHeap(Comparator<T> comparator) {
+        Node2<T> current = head;
+        for (int i = size / 2 - 1; i >= 0; i--) {
+            heapify(current, size, i, comparator);
+            current = current.next;
+        }
+    }
+
+    private void sortHeap(Comparator<T> comparator) {
+        for (int i = size - 1; i > 0; i--) {
+            Node2<T> last = getNode(i);
+            T temp = head.data;
+            head.data = last.data;
+            last.data = temp;
+            heapify(head, i, 0, comparator);
+        }
+    }
+
+    private void heapify(Node2<T> start, int n, int i, Comparator<T> comparator) {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && comparator.compare(getNode(left).data, getNode(largest).data) > 0) {
+            largest = left;
+        }
+
+        if (right < n && comparator.compare(getNode(right).data, getNode(largest).data) > 0) {
+            largest = right;
+        }
+
+        if (largest != i) {
+            Node2<T> largestNode = getNode(largest);
+            Node2<T> iNode = getNode(i);
+            T temp = iNode.data;
+            iNode.data = largestNode.data;
+            largestNode.data = temp;
+            heapify(start, n, largest, comparator);
+        }
+    }
+    private Node2<T> getNode ( int index){
+        Node2<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current;
     }
 }

@@ -164,10 +164,10 @@ public class ZadanieOsnovnoe {
 
     public static void CircularyDoublyLinkedList() {
         CircularDoublyLinkedList<Integer> list = new CircularDoublyLinkedList<>();
-        list.add(1);
-        list.add(2);
         list.add(3);
+        list.add(2);
         list.add(4);
+        list.add(1);
         System.out.println("Список в прямом порядке:");
         list.printForward();
         System.out.println("Список в обратном порядке:");
@@ -177,31 +177,40 @@ public class ZadanieOsnovnoe {
         list.remove(3);
         list.printForward();
         System.out.println("Количество элементов в списке после удаления: "+list.size());
+        //list.quickSort(Comparator.naturalOrder());
+        list.heapSort(Comparator.naturalOrder());
+        System.out.println(("Отсортированный массив: "));
+        list.printForward();
     }
 
     public static void SelfOrganisedList(){
         SelfOrganizingList<String> list = new SelfOrganizingList<>();
-        list.addToFront("A");
         list.addToFront("B");
-        list.addToMiddle("E", 2);
-        list.insertForward("C");
+        list.addToFront("C");
+        list.addToMiddle("A", 2);
+        list.insertForward("E");
         System.out.println("Список в прямом порядке:");
         list.printForward();
         System.out.println("Список в обратном порядке:");
         list.printBackward();
-        list.get("E");
+        list.get("C");
         System.out.println("Список после доступа к элементу 'E':");
         list.printForward();
-        list.get("A");
+        list.get("B");
         System.out.println("Список после доступа к элементу 'A':");
         list.printForward();
-        list.get("B");
+        list.get("E");
+        list.get("A");
         System.out.println("Список после доступа к элементу 'B':");
         list.printForward();
         list.remove("C");
         System.out.println("Список после удаления элемента 'C':");
         list.printForward();
         System.out.println("Число элементов в списке: " + list.size());
+        System.out.println("Отсортированный массив: ");
+        list.quickSort(Comparator.naturalOrder());
+        list.heapSort(Comparator.naturalOrder());
+        list.printForward();
     }
     public static void MultilevelSinglyLinkedList() {
         MultilevelSinglyLinkedList list = new MultilevelSinglyLinkedList();
@@ -211,21 +220,25 @@ public class ZadanieOsnovnoe {
         list.addToEnd(4);
         list.addToMiddle(5, 2);
         list.printList();
-        list.addChild(1, 6);
         list.addChild(1, 7);
+        list.addChild(1, 6);
         list.addChild(2, 8);
         list.printList();
         list.remove(3); // Удаляем элемент с индексом 3
         System.out.println("Список после удаления элемента:");
         list.printList();
         System.out.println("Число элементов в списке: " + list.size());
+        //list.quickSort();
+        list.heapSort();
+        System.out.println("Отсортированный массив: ");
+        list.printList();
     }
     public static void main(String[] args) {
         //ArrayList();
         //LinkedList();
         //HashSet();
         //HashMap();
-        // CircularyDoublyLinkedList();
+        //CircularyDoublyLinkedList();
         //SelfOrganisedList();
         MultilevelSinglyLinkedList();
     }
