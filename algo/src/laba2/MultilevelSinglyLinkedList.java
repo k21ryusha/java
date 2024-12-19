@@ -48,9 +48,9 @@ class Node {
             Node newNode = new Node(data);
             Node current = head;
             int i = 0;
-            while (current != null && i < index - 1) {
-                current = current.next;
-                i++;
+            while (current != null && i < index - 1) {//еще не достигли конца и до узла перед которым надо вставить элемент
+                current = current.next;//переход к след индексу
+                i++; //позиция в списке
             }
             newNode.next = current.next;
             current.next = newNode;

@@ -117,8 +117,8 @@ public class OsnovnoeZadanie {
         for (int i : arr) {
             System.out.print(i + " ");
         }
-        //quickSort(arr, 0, arr.length - 1);
-        //treeSort(arr);
+        quickSort(arr, 0, arr.length - 1);
+        treeSort(arr);
         heapSort(arr);
         System.out.println();
         System.out.println("Отсортированный массив: ");

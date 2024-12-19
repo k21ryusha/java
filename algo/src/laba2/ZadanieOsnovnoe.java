@@ -3,8 +3,7 @@ package laba2;
 import java.util.*;
 
 public class ZadanieOsnovnoe {
-    static long iterationsCount = 10000000;
-
+    static long iterationsCount = 1_000_000_0;
     public static void ArrayList() {
         ArrayList<Student> students = new ArrayList<>();
         long startTime = System.nanoTime(); 
@@ -47,7 +46,6 @@ public class ZadanieOsnovnoe {
     }
 
     public static void LinkedList() {
-        // работа с linked list
         LinkedList<Student> students = new LinkedList<>();
         long startTime = System.nanoTime(); 
         for (long i = 0; i < iterationsCount; i++) {
@@ -89,7 +87,6 @@ public class ZadanieOsnovnoe {
     }
 
     public static void HashSet() {
-        // работа с hash map
         HashSet<Student> students = new HashSet<>();
         long startTime = System.nanoTime(); 
         for (long i = 0; i < iterationsCount; i++) {
@@ -121,7 +118,6 @@ public class ZadanieOsnovnoe {
     }
 
     public static void HashMap() {
-        // работа с hash map
         Map<Long, Student> students = new HashMap<>();
         long startTime = System.nanoTime(); 
         for (long i = 0; i < iterationsCount; i++) {
@@ -178,9 +174,10 @@ public class ZadanieOsnovnoe {
         list.printForward();
         System.out.println("Количество элементов в списке после удаления: "+list.size());
         //list.quickSort(Comparator.naturalOrder());
-        list.heapSort(Comparator.naturalOrder());
-        System.out.println(("Отсортированный массив: "));
-        list.printForward();
+        //list.heapSort(Comparator.naturalOrder());
+        //System.out.println(("Отсортированный массив: "));
+        //list.printForward();
+        System.out.println(list.Check());
     }
 
     public static void SelfOrganisedList(){
@@ -209,7 +206,7 @@ public class ZadanieOsnovnoe {
         System.out.println("Число элементов в списке: " + list.size());
         System.out.println("Отсортированный массив: ");
         list.quickSort(Comparator.naturalOrder());
-        list.heapSort(Comparator.naturalOrder());
+        //list.heapSort(Comparator.naturalOrder());
         list.printForward();
     }
     public static void MultilevelSinglyLinkedList() {
@@ -224,7 +221,7 @@ public class ZadanieOsnovnoe {
         list.addChild(1, 6);
         list.addChild(2, 8);
         list.printList();
-        list.remove(3); // Удаляем элемент с индексом 3
+        list.remove(1); // Удаляем элемент с индексом 3
         System.out.println("Список после удаления элемента:");
         list.printList();
         System.out.println("Число элементов в списке: " + list.size());
@@ -233,6 +230,23 @@ public class ZadanieOsnovnoe {
         System.out.println("Отсортированный массив: ");
         list.printList();
     }
+    public static void Deque(){
+        DoubleEndedQueue deque = new DoubleEndedQueue();
+        deque.push(1);
+        deque.push(2);
+        deque.push(3);
+        if(deque.isEmpty()){
+            System.out.println("Очередь пуста");
+        } else{
+            Iterator<Integer> iterator = deque.iterator();
+            while(iterator.hasNext()){
+                System.out.print(iterator.next()+"  ");
+            }
+        }
+        System.out.println(deque.pop());
+        System.out.println(deque.pop());
+        System.out.println(deque.pop());
+    }
     public static void main(String[] args) {
         //ArrayList();
         //LinkedList();
@@ -240,6 +254,7 @@ public class ZadanieOsnovnoe {
         //HashMap();
         //CircularyDoublyLinkedList();
         //SelfOrganisedList();
-        MultilevelSinglyLinkedList();
+        //MultilevelSinglyLinkedList();
+        Deque();
     }
 }

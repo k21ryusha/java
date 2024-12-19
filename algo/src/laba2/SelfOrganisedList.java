@@ -71,13 +71,11 @@ class SelfOrganizingList<T> {
             }
         }
     }
-
     public T get(T element) {
-        counts.putIfAbsent(element, 0);
-        if (!this.list.contains(element)) {
+        counts.putIfAbsent(element, 0);//проверяем запись в мапе если нет добавляем с 0
+        if (!this.list.contains(element)) { // если нет в листе, добавляем в лист
             list.addFirst(element);
         }
-        counts.putIfAbsent(element,0);
         insertForward(element);
         return element;
     }

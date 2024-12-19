@@ -188,4 +188,9 @@ class CircularDoublyLinkedList<T> {
         }
         return current;
     }
+
+    public boolean Check(){
+        Node2<T> current = head.prev;
+        return current.next == head && head.prev == current;
+    }
 }
